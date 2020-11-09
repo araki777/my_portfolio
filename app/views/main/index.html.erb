@@ -1,0 +1,149 @@
+<%= content_for(:html_head) do %>
+  <%= stylesheet_link_tag "main" %>
+<% end %>
+
+<div class="menu-toggle">
+  <i class="fas fa-bars"></i>
+</div>
+
+<nav id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+    <li class="sidebar-title">
+      <a class="js-scroll-trigger" href="#main">Portfolio</a>
+    </li>
+    <li class="sidebar-nav-item">
+      <a class="js-scroll-trigger" href="#main">Top</a>
+    </li>
+    <li class="sidebar-nav-item">
+      <a class="js-scroll-trigger" href="#about">About</a>
+    </li>
+    <li class="sidebar-nav-item">
+      <a class="js-scroll-trigger" href="#portfolio">Portfolio</a>
+    </li>
+    <li class="sidebar-nav-item">
+      <a class="js-scroll-trigger" href="#information">Information</a>
+    </li>
+  </ul>
+</nav>
+
+<header class="header">
+  <div class="container text-center margin-auto-y">
+    <h1 class="header-title">Hello World</h1>
+    <h3 class="mt0-mb3 header-text">
+      <em>My Portfolio</em>
+    </h3>
+    <a class="btn js-scroll-trigger" href="#about">Who's ME?</a>
+  </div>
+</header>
+
+<section class="content-section introduction-container" id="about">
+  <div class="container text-center">
+    <div class="row">
+      <div class="margin-auto-x">
+        <div class="content-section-heading">
+          <h3 class="text-secondary mb-0 text-yellow">About</h3>
+          <h2 class="mt0-mb3 text-dark">自己紹介</h2>
+        </div>
+        <div class="row">
+          <div class="introduction-content">
+            <span class="introduction-icon"><img src="/images/face_icon.jpg", class="icon-img"></span>
+          </div>
+          <div class="introduction-content">
+            <p class="lead mt0-mb3"></p>
+            <ul class="lead mt0-mb3">
+              <li>名前：荒木 真人</li>
+              <li>出身地：島根県</li>
+              <li>経歴：(株)フォックスリレーションで一年半、ソフトウェアエンジニアとして勤務</li>
+              <li>趣味：映画鑑賞、サッカー</li>
+              <li>その他：現在、AWSについての勉強を行っている。自力でサーバー構築、ネットワーク構築して本番環境をデプロイできるようにするのが今の目標</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section" id="portfolio">
+  <div class="container">
+    <div class="content-section-heading text-center">
+      <h3 class="mb-0 text-yellow">Portfolio</h3>
+      <h4 class="portfolio-title-text text-dark">web個人制作物</h4>
+    </div>
+    <div class="row no-gutters">
+      <div class="portfolio-content">
+        <a class="portfolio-item" href="#">
+          <span class="caption">
+            <span class="caption-content">
+              <h2>脳トレパズル機能サービス</h2>
+              <p class="mb-0">全部で5問出題されます。<br />[html, css, jQuery]</p>
+            </span>
+          </span>
+          <img class="img-fluid" src="/images/haikei3.jpg">
+        </a>
+      </div>
+      <div class="portfolio-content">
+        <a class="portfolio-item" href="#">
+          <span class="caption">
+            <span class="caption-content">
+              <h2>タスク管理サービス</h2>
+              <p class="mb-0">[Ruby, Rails, HTML, CSS, jQuery]</p>
+            </span>
+          </span>
+          <img class="img-fluid" src="/images/haikei3.jpg">
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="information" class="footer text-center">
+  <div class="container text-center">
+    <h3 class="text-secondary mb-0 text-yellow">Information</h3>
+    <h2 class="information-title-text text-white">お問い合わせ・SNS</h2>
+    <h2 class="information-text">ご相談があればメールでご連絡ください。</h2>
+    <ul class="list-inline mt0-mb3">
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle mr-3">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white mr-3">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+    </ul>
+    <p class="copy-right mb-0">Copyright @ ARAKI portfolio 2020</p>
+  </div>
+</footer>
+
+<a class="page-top-button button--round-l" href="#main">
+  <i class="fas fa-angle-up fa-2x"></i>
+</a>
+
+<%= javascript_tag do %>
+  $(function() {
+    var topBtn = $('.page-top-button');
+    topBtn.hide();
+
+    // 画面スクロール時の挙動
+    $(window).scroll(function() {
+      if ($(this).scrollTop() > 100) {
+        topBtn.fadeIn();
+      } else {
+        topBtn.fadeOut();
+      }
+    });
+
+    $(".menu-toggle").on('click', function() {
+      $("#sidebar-wrapper").toggleClass("active");
+      $(this).children(".fa-bars, .fa-times").toggleClass("fa-bars, fa-times");
+    });
+  });
+<% end %>

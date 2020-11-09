@@ -1,0 +1,427 @@
+/* 共通CSS */
+
+$main-color: #9ec34b; // メインの配色
+$bg-and-text-color-white: #f8f9fa; // テキスト・背景色用の白色
+$bg-and-text-color-black: #343a40; // テキスト・背景色用の黒色
+
+ul {
+  margin-top: 0;
+}
+ul li {
+  margin-bottom: 10px;
+  color: #3B3C3D;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+}
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.text-center {
+  text-align: center !important;
+}
+.content-section {
+  padding-top: 7.5rem;
+  padding-bottom: 7.5rem;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.text-dark {
+  color: #343a40 !important;
+}
+.text-yellow {
+  color: #ecb807;
+}
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+.mt0-mb3 {
+  margin-top: 0 !important;
+  margin-bottom: 3rem !important;
+}
+
+/* メニュートグルボタンのCSS */
+.menu-toggle {
+  position: fixed;
+  right: 15px;
+  top: 15px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  color: $bg-and-text-color-white;
+  background: rgba(52, 58, 64, .5);
+  line-height: 50px;
+  z-index: 999;
+  border-radius: .25rem !important;
+}
+.menu-toggle:hover {
+  background: rgba(52, 58, 64, .8);
+  cursor: pointer;
+}
+
+/* サイドバーのCSS */
+#sidebar-wrapper {
+  position: fixed;
+  z-index: 2;
+  right: 0;
+  width: 250px;
+  height: 100%;
+  transition: all .4s ease 0s;
+  -webkit-transition: all .4s ease 0s;
+  transform: translateX(250px);
+  background: $main-color;
+}
+#sidebar-wrapper.active {
+  right: 250px;
+  width: 250px;
+  transition: all .4s ease 0s;
+}
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sidebar-nav .sidebar-title {
+  font-size: 1.2rem;
+  background: rgba(52, 58, 64, .1);
+  height: 80px;
+  line-height: 50px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+}
+.sidebar-nav .sidebar-title a {
+  color: $bg-and-text-color-white;
+  text-decoration: none;
+}
+.sidebar-nav .sidebar-nav-item a {
+  display: block;
+  text-decoration: none;
+  color: $bg-and-text-color-white;
+  padding: 15px;
+}
+.sidebar-nav .sidebar-nav-item a:hover {
+  background: rgba(52, 58, 64, .5);
+}
+
+/* ヘッダーの記述 */
+.header {
+  min-height: 30rem;
+  position: relative;
+  width: 100%;
+  height: auto;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  background: linear-gradient( 90deg, rgba(255, 255, 255, .1) 0, rgba(255, 255, 255, .1) 100%), url("/images/header.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+}
+.margin-auto-y {
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+}
+.header-title {
+  font-size: 4rem;
+  margin: 0 0 .25rem !important;
+  padding: 0;
+  color: $bg-and-text-color-black;
+}
+.header-text {
+  font-size: 1.75rem;
+}
+.header-text em {
+  color: $main-color;
+}
+
+/* ヘッダーボタンのCSS */
+.btn {
+  display: inline-block;
+  width: 180px;
+  height: 50px;
+  text-align: center;
+  background-color: $main-color;
+  font-size: 16px;
+  line-height: 52px;
+  color: $bg-and-text-color-white;
+  text-decoration: none;
+  font-weight: bold;
+  border: 2px solid $main-color;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  margin: 0 auto;
+}
+.btn:after{
+  width: 100%;
+  height: 0;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background : $bg-and-text-color-white;
+  opacity: 0;
+  transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  transition: .2s;
+  z-index: -1;
+}
+.btn:hover{
+  color: $main-color;
+}
+.btn:hover:after{
+  height: 240%;
+  opacity: 1;
+}
+.btn:active:after{
+  height: 340%;
+  opacity: 1;
+}
+
+/* 自己紹介のCSS */
+.introduction-container {
+  background: $bg-and-text-color-white;
+}
+.margin-auto-x {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.content-section-heading h3 {
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+.content-section-heading h2 {
+  font-size: 3rem;
+}
+.introduction-content {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.introduction-icon {
+  margin-bottom: 3rem !important;
+  margin-top: 3rem !important;
+  float: left !important;
+}
+.icon-img {
+  border-radius: 50%;
+  width: 60%;
+  height: 60%;
+  padding: 20px;
+  vertical-align: middle;
+  border-style: none;
+}
+.lead {
+  text-align: left !important;
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+/* ポートフォリオ項目CSS */
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+.portfolio-title-text {
+  margin-top: 0;
+  margin-bottom: 5rem !important;
+  font-size: 3rem;
+}
+.portfolio-content {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 0;
+  padding-left: 0;
+}
+.portfolio-item {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  max-width: 250px;
+  max-height: 500px;
+  margin: auto auto 1rem;
+}
+.portfolio-item .caption {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(33, 37, 41, .2);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+}
+.portfolio-item .caption .caption-content {
+  color: #fff;
+  margin: auto 2rem 2rem;
+}
+.portfolio-item .caption .caption-content h2 {
+  font-size: .8rem;
+  text-transform: uppercase;
+}
+.portfolio-item .caption .caption-content p {
+  font-weight: 300;
+  font-size: 1.2rem;
+}
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  border-style: none;
+}
+
+/* footer部分のCSS */
+footer.footer {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  background: $bg-and-text-color-black;
+  color: $bg-and-text-color-white;
+}
+.information-title-text {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 2rem;
+}
+.information-text {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* footerのボタン部分 */
+.list-inline {
+  padding-left: 0;
+  list-style: none;
+}
+.list-inline-item {
+  display: inline-block;
+}
+.list-inline-item:not(last-child) {
+  margin-right: .5rem;
+}
+footer.footer .social-link {
+  display: block;
+  height: 4rem;
+  width: 4rem;
+  line-height: 4.3rem;
+  font-size: 1.5rem;
+  background-color: $main-color;
+  color: $bg-and-text-color-white;
+  transition: background-color .15s ease-in-out;
+  box-shadow: 0 3px 3px 0 rbga(0, 0, 0, .1);
+}
+footer.footer .social-link:hover {
+ background: rgba(158, 195, 75, .2);
+}
+.rounded-circle {
+  border-radius: 50% !important;
+}
+.copy-right {
+  font-size: 80%;
+  font-weight: 400;
+}
+
+// ページトップボタンのCSS
+.page-top-button {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+	width: 55px;
+	height: 55px;
+  text-align: center;
+  border-radius: 50%;
+	color: $main-color;
+	-webkit-transition: color 0.3s;
+	transition: color 0.3s;
+}
+.page-top-button::before {
+	content: '';
+	position: absolute;
+	top: -10px;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: inherit;
+	z-index: -1;
+	box-shadow: inset 0 0 0 2px $main-color;
+	-webkit-transform: scale3d(1, 1, 1);
+	transform: scale3d(1, 1, 1);
+	-webkit-transition: box-shadow 0.3s, -webkit-transform 0.3;
+	transition: box-shadow 0.3s, transform 0.3s;
+}
+.page-top-button:hover {
+	color: $bg-and-text-color-white;
+}
+.page-top-button:hover::before {
+	box-shadow: inset 0 0 0 35px $main-color;
+	-webkit-transform: scale3d(0.9, 0.9, 1);
+	transform: scale3d(0.9, 0.9, 1);
+}
+
+@media screen and (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .header {
+    height: 100vh;
+  }
+  .header-title {
+    font-size: 5.5rem;
+  }
+  .container {
+    max-width: 960px;
+  }
+  .introduction-content {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  .portfolio-content {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  .portfolio-item {
+    max-width: none;
+    margin: 0;
+  }
+  .portfolio-item img {
+    -webkit-transition: -webkit-clip-path .25s ease-out, background-color .7s;
+    clip-path: inset(0);
+  }
+  .portfolio-item .caption .caption-content {
+    transition: opacity .25s;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    margin-bottom: 5rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
