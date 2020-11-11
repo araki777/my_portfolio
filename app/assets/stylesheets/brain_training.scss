@@ -74,6 +74,51 @@
     height: 500px;
     margin: 0 auto;
     border: 1px solid #000000;
+    position: relative;
+
+    .panel {
+      text-align: center;
+      border: 1px solid #000000;
+      position: absolute;
+    }
+
+    .panel-1 {
+      background: rgb(247, 200, 200);
+    }
+    .panel-2 {
+      background: rgb(254, 255, 201);
+    }
+    .panel-3 {
+      background: rgb(207, 255, 195);
+    }
+    .panel-4 {
+      background: rgb(200, 238, 247);
+    }
+    .panel-5 {
+      background: rgb(200, 205, 247);
+    }
+    .panel-6 {
+      background: rgb(255, 197, 164);
+    }
+    .panel-7 {
+      background: rgb(135, 253, 106);
+    }
+    .panel-8 {
+      background: rgb(250, 140, 226);
+    }
+    .panel-9 {
+      background: rgb(228, 228, 228);
+    }
+
+    img {
+      height: 70px;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+      margin: auto;
+    }
   }
 
   &-item-4,

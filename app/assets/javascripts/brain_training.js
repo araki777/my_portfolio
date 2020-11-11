@@ -1,9 +1,18 @@
 $(function() {
 
+  // 配列をランダムに並び変えて取得する
+  function getRandomArray(arr) {
+    for (var cnt = arr.length - 1; cnt >= 0; cnt--) {
+      var rnd = Math.floor(Math.random() * (cnt + 1));
+      var tmp = arr[cnt];
+      arr[cnt] = arr[rnd];
+      arr[rnd] = tmp;
+    }
+    return arr;
+  }
+
   brainTrainingQuestion1 = function() {
-    var panel = []; // ランダムに数字を入れるようの配列
-    var count = 1; // クリックすると値が増える
-    var clearCount = 0 // クリアしたものの判定
+    var clickCount = 1; // クリックすると値が増える
 
     setPanel1();
 
@@ -13,8 +22,8 @@ $(function() {
       var num = elm[1].replace(/^question-1-/, ''); // クラス名の中からquestion-1-?の末尾の数字を取得
 
       // クリックした要素の値と配列内の値が同じ値だったら
-      if (num == count) {
-        count += 1;
+      if (num == clickCount) {
+        clickCount += 1;
 
         $(this).css({
           "pointer-events": "none",
@@ -22,78 +31,87 @@ $(function() {
         });
 
         // もし要素の値が10だったら
-        if (count == 11) {
+        if (clickCount == 11) {
           alert("クリアー！！");
         }
       } else {
-        count = 1;
+        clickCount = 1;
         $(".question-1").remove();
         setPanel1();
       }
     });
 
     function setPanel1() {
-      // パネルをリセットする際に、配列を再代入
-      panel = [];
+
+      // パネルの格納用配列の初期化
+      var panel = new Array();
+      panel.length = 0;
 
       // ランダム配置するパネルの枚数分の番号を配列に格納
       for(i = 1; i < 11; i++) {
         panel.push(i)
       };
 
-      //配列の中身0~9をランダムに並び替え
-      panel.sort(function() {
-        return Math.random() - Math.random();
-      });
+      getRandomArray(panel);
 
       // tr要素の何列かを判定する値
-      var a = 1;
+      var tr = 1;
 
       // 10枚のパネル生成
       for (i = 0; i < 10; i++) {
+
+        // 二列目だったら
         if (i > 4) {
-          a = 2;
+          tr = 2 || (tr == 1);
         }
-        $(".tr-question-1-" + a).append("<td class='question-1 question-1-" + panel[i] + "'><img src='images/brain_training/" + panel[i] + ".png'></td>");
+
+        $(".tr-question-1-" + tr).append("<td class='question-1 question-1-" + panel[i] + "'><img src='images/brain_training/" + panel[i] + ".png'></td>");
       }
     }
   }
 
   brainTrainingQuestion2 = function() {
-    var panel = []; // ランダムに数字を入れるようの配列
-    var clearCount = 0 // クリアしたものの判定
+
+    // 背景色と文字が同じものの数を入れる変数
+    var colorSomeCount = 0;
+
+    // 決定ボタンを押した際の判定
+    $(".question-2-decision-button").on("click", function() {
+      var count = $("#number").val();
+      if (count == colorSomeCount) {
+        alert("クリアー！！！");
+      } else {
+        colorSomeCount = 0; // 初期化
+        $(".question-2").remove();
+        setPanel2();
+      }
+    });
 
     setPanel2();
 
     function setPanel2() {
-      // パネルをリセットする際に、配列を再代入
-      panel = [];
 
       // 配列に色の名前を格納
-      panel = ["red", "blue", "yellow", "green", "orange", "purple", "gray", "brown", "pink", "white"];
+      var panel = ["red", "blue", "yellow", "green", "orange", "purple", "gray", "brown", "pink", "white"];
 
-      //配列の色名をランダムに並び替え
-      panel.sort(function() {
-        return Math.random() - Math.random();
-      });
+      getRandomArray(panel);
 
       // tr要素の何列かを判定する値
-      var a = 1;
+      var tr = 1;
 
-      // ランダムポイント
-      var randomPoint = Math.floor(Math.random() * panel.length)
-
-      // 背景色と文字が同じだった物の数を入れる
-      var colorSomeCount = 0;
+      // ランダム値
+      var randomPoint = Math.floor(Math.random() * panel.length);
 
       // 10枚のパネル生成
       for (i = 0; i < 10; i++) {
-        if (i > 4) {
-          a = 2;
-        }
-        $(".tr-question-2-" + a).append("<td class='question-2 question-color-" + panel[i] + "'>" + panel[i] + "</td>");
 
-        // もしランダム値と同じだった場合
+        // 二列目だったら
+        if (i > 4) {
+          tr = 2 || (tr == 1);
+        }
+        $(".tr-question-2-" + tr).append("<td class='question-2 question-color-" + panel[i] + "'>" + panel[i] + "</td>");
+
+        // もしランダム値と同じだった場合 (答えに背景色と文字が同じものを一つ以上作る必要があるため)
         if (i == randomPoint) {
           // パネル名と同じ背景色をつける
           $(".question-color-" + panel[i]).css({
@@ -102,33 +120,99 @@ $(function() {
 
           colorSomeCount += 1;
         } else {
-          // 配列の中からランダムで選んだ名前の背景色をつける
-          var randomCountAAA = panel[Math.floor(Math.random() * panel.length)]
+          var randomBg = panel[Math.floor(Math.random() * panel.length)]
           $(".question-color-" + panel[i]).css({
-            "background": randomCountAAA
+            "background": randomBg
           });
 
           // ランダムで選んだ名前の背景色ともともとの名前が同じだった場合
-          if (randomCountAAA == panel[i]) {
+          if (randomBg == panel[i]) {
             colorSomeCount += 1;
           }
         }
       }
-
-      // 決定ボタンを押した際の判定
-      $(".question-2-decision-button").on("click", function() {
-        var count = $("#number").val();
-        if (count == colorSomeCount) {
-          alert("クリアー！！！");
-        } else {
-          $(".question-2").remove();
-          setPanel2();
-        }
-      });
     }
   }
+
   brainTrainingQuestion3 = function() {
 
+    var parent = $(".brain-training-contents-item-3"); // 親要素を取得
+
+    var parentWidth = parent.width(); // 親要素の横幅
+    var parentHeight = parent.height(); // 親要素の高さ
+
+    var W = 3; // パネルの横の個数
+    var H = 3; // パネルの縦の個数
+
+    var starX; // スターパネルのleft値の変数
+    var starY; // スターパネルのtop値の変数
+
+    var clear = 0; // クリアー判定用
+
+    setPanel3();
+
+    //クリアー判定
+    function question3GameClear(){
+      for(i = 0; i < 9; i++) {
+        if (i == 0) {
+          var x = parseInt($('.panel-star').css('left')) / (parentHeight / W);
+          var y = parseInt($('.panel-star').css('top')) / (parentWidth / H);
+        } else {
+          var x = parseInt($('.panel-' + i).css('left')) / (parentHeight / W);
+          var y = parseInt($('.panel-' + i).css('top')) / (parentWidth / H);
+        }
+
+        var clearX = i % 3;
+        var clearY = Math.floor(i / 3);
+        if((clearX == x)&&(clearY == y)) { //0～9のパネルが正しい位置にあるかを確認
+          clear ++; //OKならclearに+1
+        }
+      }
+      if(9 <= clear) { //9枚のパネルが全て正しい位置にあれば
+        alert("クリアー！");
+      } else {
+        clear = 0;
+      }
+    }
+
+    // パネルクリック時の処理
+    $(document).on("click", ".panel", function() {
+      var idX = parseInt($(this).css('left')); //クリックしたパネルのleft値を保存
+      var idY = parseInt($(this).css('top')); //クリックしたパネルのtop値を保存
+
+      //クリックしたパネルとスターパネルが隣接していたら
+      if (((idX == starX) && ((idY == starY - (parentHeight / H)) || (idY == starY + (parentHeight / H)))) || ((idY == starY) && ((idX == starX - (parentWidth / W)) || (idX == starX + (parentWidth / W))))) {
+        $(this).css({'left': starX, 'top': starY}); //クリックしたパネルをスターパネルの位置に移動
+        $(".panel-star").css({'left': idX, 'top': idY}); //スターパネルをクリックしたパネルの位置に移動
+        starX = idX; //変数に保存していたスターパネルのleft値を現在の値に更新
+        starY = idY; //変数に保存していたスターパネルのtop値を現在の値に更新
+      }
+
+      question3GameClear(); //クリアー判定の関数を実行
+    });
+
+    function setPanel3() {
+
+      var panel = ["star", "1", "2", "3", "4", "5", "6", "7", "8"]
+
+      panel = getRandomArray(panel);
+
+      // パネルを生成
+      for (i = 0; i < 9; i++) {
+        $(".brain-training-contents-item-3").append("<div class='panel panel-" + panel[i] + "'><img src='images/brain_training/" + panel[i] + ".png'>");
+        $(".panel-" + panel[i]).css({
+          "width": parentWidth / W,
+          "height": parentHeight / H,
+          "top": Math.floor(i / 3) * (parentHeight / W),
+          "left": (i % 3) * (parentWidth / H)
+        });
+
+        if (panel[i] == "star") {
+          starX = parseInt($(".panel-" + panel[i]).css("left")); // スターパネルの初期left値を代入
+          starY = parseInt($(".panel-" + panel[i]).css("top")); // スターパネルの初期top値を代入
+        }
+      }
+    }
   }
   brainTrainingQuestion4 = function() {
 
