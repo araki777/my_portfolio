@@ -1,0 +1,60 @@
+<%= content_for(:html_head) do %>
+  <%= javascript_include_tag "brain_training" %>
+  <%= stylesheet_link_tag "brain_training" %>
+<% end %>
+
+<div class="brain-training-container">
+  <div class="brain-training-container-inner">
+    <p class="brain-training-title">・問題1</p>
+    <p class="brain-training-explation">説明: 1~10のランダムの数字を小さい値から順に押す</p>
+    <div class="brain-training-contents">
+      <table class="brain-training-contents-item-1">
+        <tr class="tr-question-1-1">
+        </tr>
+        <tr class="tr-question-1-2">
+        </tr>
+      </table>
+    </div>
+    <p class="brain-training-title">・問題2</p>
+    <p class="brain-training-explation">説明: 1~10のランダムの数字を小さい値から順に押す</p>
+    <div class="brain-training-contents">
+      <table class="brain-training-contents-item-2" id="question-2">
+        <tr class="tr-question-2-1">
+        </tr>
+        <tr class="tr-question-2-2">
+        </tr>
+      </table>
+      <div class="question-2-decision-container">
+        <div class="question-2-decision-container-inner">
+          <input type="number" value="" id="number">
+          <div class="question-2-decision-button">解答</div>
+        </div>
+      </div>
+    </div>
+    <p class="brain-training-title">・問題3</p>
+    <p class="brain-training-explation">説明: 1~10のランダムの数字を小さい値から順に押す</p>
+    <div class="brain-training-contents">
+      <div class="brain-training-contents-item-3" id="question-3"></div>
+    </div>
+    <p class="brain-training-title">・問題4</p>
+    <p class="brain-training-explation">説明: 1~10のランダムの数字を小さい値から順に押す</p>
+    <div class="brain-training-contents">
+      <div class="brain-training-contents-item-4" id="question-4"></div>
+    </div>
+    <p class="brain-training-title">・問題5</p>
+    <p class="brain-training-explation">説明: 1~10のランダムの数字を小さい値から順に押す</p>
+    <div class="brain-training-contents">
+      <div class="brain-training-contents-item-5" id="question-5"></div>
+    </div>
+  </div>
+</div>
+
+<%= javascript_tag do %>
+  $(function() {
+    brainTrainingQuestion1();
+    brainTrainingQuestion2();
+    brainTrainingQuestion3();
+    brainTrainingQuestion4();
+    brainTrainingQuestion5();
+  });
+<% end %>
