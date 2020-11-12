@@ -123,7 +123,19 @@
 
   &-item-4,
   &-item-5 {
-    width: 600px;
-    height: 600px;
+    width: 1000px;
+    height: 500px;
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #brain-training-left-box,
+  #brain-training-right-box {
+    position: relative;
+    border: 1px solid #000000;
+    width: 45%;
+    height: 100%;
   }
 }

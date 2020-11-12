@@ -1,5 +1,6 @@
 <%= content_for(:html_head) do %>
   <%= javascript_include_tag "brain_training" %>
+  <%= javascript_include_tag "easeljs.min.js" %>
   <%= stylesheet_link_tag "brain_training" %>
 <% end %>
 
@@ -39,7 +40,10 @@
     <p class="brain-training-title">・問題4</p>
     <p class="brain-training-explation">説明: 1~10のランダムの数字を小さい値から順に押す</p>
     <div class="brain-training-contents">
-      <div class="brain-training-contents-item-4" id="question-4"></div>
+      <div class="brain-training-contents-item-4" id="question-4">
+        <canvas id="brain-training-left-box"></canvas>
+        <canvas id="brain-training-right-box"></canvas>
+      </div>
     </div>
     <p class="brain-training-title">・問題5</p>
     <p class="brain-training-explation">説明: 1~10のランダムの数字を小さい値から順に押す</p>

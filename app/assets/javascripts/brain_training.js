@@ -215,8 +215,53 @@ $(function() {
     }
   }
   brainTrainingQuestion4 = function() {
-
+    // var stage = new createjs.Stage("brain-training-left-box"); // ステージの作成
+    // var circles = []; // サークルを入れる配列
+    //
+    // // サークル作成関数の呼び出し
+    // for (i = 0; i < 500; i++) {
+    //   var circle = new Circle();
+    //   circles.push(circle); // サークル配列にサークルを入れる
+    //   stage.addChild(circle.shape); // サークルの中からオブジェクトを取り出し、ステージにセット
+    // }
+    //
+    // // サークルの作成
+    // function Circle() {
+    //
+    //   // サークルの初期値を入れる
+    //   var defaults = {
+    //     color: "#fff",
+    //     borderColor: "#000",
+    //     defaultX: Math.random() * (stage.canvas.width - 20),
+    //     defaultY: Math.random() * (stage.canvas.height - 9),
+    //   };
+    //
+    //   this.shape = new createjs.Shape(); // オブジェクトの生成
+    //   this.shape.graphics.beginFill(defaults.color); // オブジェクトの背景色を指定
+    //   this.shape.graphics.beginStroke(defaults.borderColor); // オブジェクトの線の色を指定
+    //   this.shape.graphics.drawEllipse(0, 0, 20, 9); // 横半径20px,縦半径9pxの楕円 (画面で見ると円形のためこのような書き方にしている)
+    //   this.shape.x = defaults.defaultX; // オブジェクトにX座標を代入
+    //   this.shape.y = defaults.defaultY; // オブジェクトにY座標を代入
+    // }
+    //
+    // // サークルの挙動
+    // Circle.prototype.update = function(mouseX, mouseY) {
+    //   if (((this.shape.x + 100) > mouseX) || ((this.shape.x - 100) < mouseX)) {
+    //     var angle = Math.atan2(this.shape.y - mouseY, this.shape.x - mouseX);
+    //     this.shape.x += Math.cos(angle) * 3;
+    //     this.shape.y += Math.sin(angle) * 3;
+    //   }
+    // }
+    //
+    // createjs.Ticker.addEventListener("tick", handleTick); // Tickイベントを監視
+    // function handleTick(event) {
+    //   for (var i = 0; i < 500; i++) {
+    //     circles[i].update(stage.mouseX, stage.mouseY); // 必要な要素を取り出してupdate関数を掛ける
+    //   }
+    //   stage.update(); // ステージの再描画
+    // }
   }
+
   brainTrainingQuestion5 = function() {
 
   }
