@@ -217,7 +217,7 @@ $(function() {
   brainTrainingQuestion4 = function() {
 
     // キャンバス要素を取得
-    const canvas = document.querySelector('#brain-training-box');
+    const canvas = $("#brain-training-box")[0];
 
     // キャンバスに記載するコンテキストを取得(二次元グラフィックの描画のため、2d指定)
     const c = canvas.getContext('2d');
@@ -307,7 +307,7 @@ $(function() {
     const y = canvas.height / 2; // Y座標の指定
 
     // プレイヤークラスの作成
-    const player = new Player(x, y, 30, 'blue');
+    const player = new Player(x, y, 10, 'white');
 
     // プロジェクターズ要素に配列を代入
     const projectiles = [];
@@ -318,10 +318,10 @@ $(function() {
     // エネミーを生成する関数
     function spawnEnemies() {
       // 1000ミリ秒のうちに
-      setInterval(() => {
+      setInterval(function() {
 
         // ランダムで10以上、30以下の大きさのみ
-        const radius = Math.random() * (30 - 10) + 10
+        const radius = Math.random() * (50 - 5) + 5
 
         let x
         let y
@@ -341,7 +341,8 @@ $(function() {
           y = Math.random() < 0.5 ? 0 - radius : canvas.height + radius
         }
 
-        const color = 'green'
+        // ランダムでカラーをつける
+        const color = `hsl(${Math.random() * 360}, 50%, 50%)`
 
         // x軸とy軸から角度を測定
         const angle = Math.atan2(canvas.height / 2 - y, canvas.width / 2 - x);
@@ -356,41 +357,94 @@ $(function() {
       }, 1000);
     }
 
+    // アニメーションのリクエストが入る変数
+    let animationId;
+
     // アニメーション関数
     function animate() {
 
-      // 画面にアニメーションの再描画リクエスト
-      requestAnimationFrame(animate);
+      // アニメーションを動かすリクエストを変数に入れる
+      animationId = requestAnimationFrame(animate);
 
-      // キャンバス要素をクリアする
-      c.clearRect(0, 0, canvas.width, canvas.height);
+      // キャンバスの背景色の指定
+      c.fillStyle = 'rgba(0, 0, 0, 0.1)'
+
+      // 上で指定した背景色をキャンバスに適用
+      c.fillRect(0, 0, canvas.width, canvas.height);
 
       // プレイヤークラスのdraw関数の呼び出し
       player.draw();
 
       // projectilesの配列分繰り返す
-      projectiles.forEach((projectile) => {
-
+      projectiles.forEach((projectile, projectileIndex) => {
         // projectileのupdate関数の呼び出し
         projectile.update();
+
+        // 弾丸がcanvas要素の外に出てしまったら
+        if (projectile.x + projectile.radius < 0 ||
+            projectile.x - projectile.radius > canvas.width ||
+            projectile.y + projectile.radius < 0 ||
+            projectile.y - projectile.radius > canvas.height
+        ) {
+          setTimeout(function() {
+            // projectilesからprojectileIndex番目の要素を1つ削除する
+            projectiles.splice(projectileIndex, 1);
+          }, 0)
+        }
       });
 
       // enemiesの配列分繰り返す
-      enemies.forEach((enemy) => {
+      enemies.forEach((enemy, enemyIndex) => {
         enemy.update();
+
+        // プレイヤーと敵の二点間の距離を計算
+        const dist = Math.hypot(player.x - enemy.x, player.y - enemy.y);
+
+        // プレイヤーの距離と敵の距離が1以下になったとき
+        if (dist - player.radius - enemy.radius < 1) {
+
+          // アニメーションを止める
+          cancelAnimationFrame(animationId);
+        }
+
+        // projectileの配列分繰り返す
+        projectiles.forEach((projectile, projectileIndex) => {
+
+          // 弾丸と敵の二点間の距離を計算
+          const dist = Math.hypot(projectile.x - enemy.x, projectile.y - enemy.y);
+
+          // 弾丸の距離と敵の距離が1以下になったとき
+          if (dist - enemy.radius - projectile.radius < 1) {
+            if (enemy.radius - 10 > 10) {
+              enemy.radius -= 10
+              // 0秒後に処理を行う
+              setTimeout(function() {
+                // projectilesからprojectileIndex番目の要素を1つ削除する
+                projectiles.splice(projectileIndex, 1);
+              }, 0)
+            } else {
+              // 0秒後に処理を行う
+              setTimeout(function() {
+                // enemiesからenemyIndex番目の要素を1つ削除する
+                enemies.splice(enemyIndex, 1);
+                // projectilesからprojectileIndex番目の要素を1つ削除する
+                projectiles.splice(projectileIndex, 1);
+              }, 0)
+            }
+          }
+        });
       });
     }
 
     // 画面をクリックした際の挙動
-    addEventListener('click', (event) => {
-
+    $(canvas).on('click', function(e) {
       // クリックされた位置が中心からみて、どの角度にあるかを計算
-      const angle = Math.atan2(event.clientY - canvas.height / 2, event.clientX - canvas.width / 2);
+      const angle = Math.atan2(e.offsetY - canvas.height / 2, e.offsetX - canvas.width / 2);
 
       // 角度をX,Y座標に代入
       const velocity = {
-        x: Math.cos(angle),
-        y: Math.sin(angle)
+        x: Math.cos(angle) * 6,
+        y: Math.sin(angle) * 6
       }
 
       // projectiles要素に作成したprojectileクラスを代入
@@ -398,7 +452,7 @@ $(function() {
         canvas.width / 2,
         canvas.height / 2,
         5,
-        'red',
+        'white',
         velocity
       ));
     });
