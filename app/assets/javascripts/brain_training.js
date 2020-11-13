@@ -266,7 +266,7 @@ $(function() {
         c.fill()
       }
 
-      // 線の成形(弾丸としての関数)
+      // 線の成形
       update() {
         this.draw();
         this.x = this.x + this.velocity.x
@@ -294,11 +294,49 @@ $(function() {
         c.fill()
       }
 
-      // 線の成形(弾丸としての関数)
+      // 線の成形
       update() {
         this.draw();
         this.x = this.x + this.velocity.x
         this.y = this.y + this.velocity.y
+      }
+    }
+
+    // 破壊された際の破片が飛び散る速度
+    const friction = 0.99
+
+    // パーシャルクラス
+    class Particle {
+
+      // クラスが呼ばれた際に引数の値に初期化する
+      constructor(x, y, radius, color, velocity) {
+        this.x = x
+        this.y = y
+        this.radius = radius
+        this.color = color
+        this.velocity = velocity
+        this.alpha = 1
+      }
+
+      // 円の成形
+      draw() {
+        c.save()
+        c.globalAlpha = this.alpha
+        c.beginPath()
+        c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+        c.fillStyle = this.color
+        c.fill()
+        c.restore()
+      }
+
+      // 線の成形
+      update() {
+        this.draw();
+        this.velocity.x *= friction // velocity.xにfrictionの値を掛ける
+        this.velocity.y *= friction // velocity.yにfrictionの値を掛ける
+        this.x = this.x + this.velocity.x // さらにxにvelocity.xを足す
+        this.y = this.y + this.velocity.y // さらにyにvelocity.yを足す
+        this.alpha -= 0.01 // 破片が表示される時間を減らす
       }
     }
 
@@ -314,6 +352,9 @@ $(function() {
 
     // エネミーズ要素に配列を代入
     const enemies = [];
+
+    // パーシャルズ要素に配列を代入
+    const particles = [];
 
     // エネミーを生成する関数
     function spawnEnemies() {
@@ -375,6 +416,16 @@ $(function() {
       // プレイヤークラスのdraw関数の呼び出し
       player.draw();
 
+      // particlesの配列分繰り返す
+      particles.forEach((particle, particleIndex) => {
+
+        if (particle.alpha <= 0) {
+          particles.splice(particleIndex, 1)
+        } else {
+          particle.update();
+        }
+      });
+
       // projectilesの配列分繰り返す
       projectiles.forEach((projectile, projectileIndex) => {
         // projectileのupdate関数の呼び出し
@@ -415,8 +466,25 @@ $(function() {
 
           // 弾丸の距離と敵の距離が1以下になったとき
           if (dist - enemy.radius - projectile.radius < 1) {
-            if (enemy.radius - 10 > 10) {
-              enemy.radius -= 10
+
+            // 敵の大きさの数だけ繰り返す
+            for (let i = 0; i < enemy.radius * 2; i++) {
+              particles.push(new Particle(
+                projectile.x,
+                projectile.y,
+                Math.random() * 2,
+                enemy.color, {
+                  x: (Math.random() - 0.5) * (Math.random() * 6),
+                  y: (Math.random() - 0.5) * (Math.random() * 6)
+                }))
+            }
+
+            // もし敵の大きさが15以上だったら
+            if (enemy.radius - 10 > 5) {
+              gsap.to(enemy, {
+                // 敵の大きさを-10する
+                radius: enemy.radius - 10
+              });
               // 0秒後に処理を行う
               setTimeout(function() {
                 // projectilesからprojectileIndex番目の要素を1つ削除する
