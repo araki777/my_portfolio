@@ -215,63 +215,199 @@ $(function() {
     }
   }
   brainTrainingQuestion4 = function() {
-    var stage = new createjs.Stage("brain-training-left-box"); // ステージの作成
-    var circles = []; // サークルを入れる配列
 
-    // サークル作成関数の呼び出し
-    for (i = 0; i < 500; i++) {
-      var circle = new Circle();
-      circles.push(circle); // サークル配列にサークルを入れる
-      stage.addChild(circle.shape); // サークルの中からオブジェクトを取り出し、ステージにセット
-    }
+    // キャンバス要素を取得
+    const canvas = document.querySelector('#brain-training-box');
 
-    // サークルの作成
-    function Circle() {
+    // キャンバスに記載するコンテキストを取得(二次元グラフィックの描画のため、2d指定)
+    const c = canvas.getContext('2d');
 
-      // サークルの初期値を入れる
-      var defaults = {
-        color: "#fff",
-        borderColor: "#000",
-        defaultX: Math.random() * (stage.canvas.width - 20),
-        defaultY: Math.random() * (stage.canvas.height - 9),
-      };
+    // 横幅と高さにキャンバス要素の横幅と高さを代入
+    canvas.width = c.canvas.width; // 横幅
+    canvas.height = c.canvas.height; // 高さ
 
-      this.shape = new createjs.Shape(); // オブジェクトの生成
-      this.shape.graphics.beginFill(defaults.color); // オブジェクトの背景色を指定
-      this.shape.graphics.beginStroke(defaults.borderColor); // オブジェクトの線の色を指定
-      this.shape.graphics.drawEllipse(0, 0, 20, 9); // 横半径20px,縦半径9pxの楕円 (画面で見ると円形のためこのような書き方にしている)
-      this.shape.x = defaults.defaultX; // オブジェクトにX座標を代入
-      this.shape.y = defaults.defaultY; // オブジェクトにY座標を代入
-    }
+    // プレイヤークラス
+    class Player {
 
-    // サークルの挙動
-    Circle.prototype.update = function(mouseX, mouseY) {
-      if (this.shape.x >= stage.canvas.width - 20) {
-        this.shape.x = stage.canvas.width - 20;
-      } else if (this.shape.x <= 0) {
-        this.shape.x = 0;
+      // クラスが呼ばれた際に引数の値に初期化する
+      constructor(x, y, radius, color) {
+        this.x = x
+        this.y = y
+        this.radius = radius
+        this.color = color
       }
 
-      if (this.shape.y >= stage.canvas.height - 9) {
-        this.shape.y = stage.canvas.height - 9;
-      } else if (this.shape.y <= 0) {
-        this.shape.y = 0;
-      }
-
-      if (((this.shape.x + 100) > mouseX) || ((this.shape.x - 100) < mouseX)) {
-        var angle = Math.atan2(this.shape.y - mouseY, this.shape.x - mouseX);
-        this.shape.x += Math.cos(angle) * 3;
-        this.shape.y += Math.sin(angle) * 3;
+      // 円の成形
+      draw() {
+        c.beginPath()
+        c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+        c.fillStyle = this.color
+        c.fill()
       }
     }
 
-    createjs.Ticker.addEventListener("tick", handleTick); // Tickイベントを監視
-    function handleTick(event) {
-      for (var i = 0; i < 500; i++) {
-        circles[i].update(stage.mouseX, stage.mouseY); // 必要な要素を取り出してupdate関数を掛ける
+    // プロジェクタークラス(プレイヤーが出す弾丸)
+    class Projectile {
+
+      // クラスが呼ばれた際に引数の値に初期化する
+      constructor(x, y, radius, color, velocity) {
+        this.x = x
+        this.y = y
+        this.radius = radius
+        this.color = color
+        this.velocity = velocity
       }
-      stage.update(); // ステージの再描画
+
+      // 円の成形
+      draw() {
+        c.beginPath()
+        c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+        c.fillStyle = this.color
+        c.fill()
+      }
+
+      // 線の成形(弾丸としての関数)
+      update() {
+        this.draw();
+        this.x = this.x + this.velocity.x
+        this.y = this.y + this.velocity.y
+      }
     }
+
+    // エネミークラス
+    class Enemy {
+
+      // クラスが呼ばれた際に引数の値に初期化する
+      constructor(x, y, radius, color, velocity) {
+        this.x = x
+        this.y = y
+        this.radius = radius
+        this.color = color
+        this.velocity = velocity
+      }
+
+      // 円の成形
+      draw() {
+        c.beginPath()
+        c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+        c.fillStyle = this.color
+        c.fill()
+      }
+
+      // 線の成形(弾丸としての関数)
+      update() {
+        this.draw();
+        this.x = this.x + this.velocity.x
+        this.y = this.y + this.velocity.y
+      }
+    }
+
+    // プレイヤークラスの座標を設定
+    const x = canvas.width / 2; // X座標の指定
+    const y = canvas.height / 2; // Y座標の指定
+
+    // プレイヤークラスの作成
+    const player = new Player(x, y, 30, 'blue');
+
+    // プロジェクターズ要素に配列を代入
+    const projectiles = [];
+
+    // エネミーズ要素に配列を代入
+    const enemies = [];
+
+    // エネミーを生成する関数
+    function spawnEnemies() {
+      // 1000ミリ秒のうちに
+      setInterval(() => {
+
+        // ランダムで10以上、30以下の大きさのみ
+        const radius = Math.random() * (30 - 10) + 10
+
+        let x
+        let y
+
+        // もしランダム値が0.5よりも小さかったら(0以上1未満の数字になるため2分の1)
+        if (Math.random() < 0.5) {
+          // キャンバスの左端 - radius,キャンバスの右端 + radiusの値をxに代入
+          x = Math.random() < 0.5 ? 0 - radius : canvas.width + radius
+
+          // yにキャンバス要素の高さ内の値を代入
+          y = Math.random() * canvas.height
+        } else {
+          // xにキャンバス要素の横幅内の値を代入
+          x = Math.random() * canvas.width
+
+          // キャンバスの上端 - radius, キャンバスの下端 + radiusの値をyに代入
+          y = Math.random() < 0.5 ? 0 - radius : canvas.height + radius
+        }
+
+        const color = 'green'
+
+        // x軸とy軸から角度を測定
+        const angle = Math.atan2(canvas.height / 2 - y, canvas.width / 2 - x);
+
+        // 角度をX,Y座標に代入
+        const velocity = {
+          x: Math.cos(angle),
+          y: Math.sin(angle)
+        }
+
+        enemies.push(new Enemy(x, y, radius, color, velocity));
+      }, 1000);
+    }
+
+    // アニメーション関数
+    function animate() {
+
+      // 画面にアニメーションの再描画リクエスト
+      requestAnimationFrame(animate);
+
+      // キャンバス要素をクリアする
+      c.clearRect(0, 0, canvas.width, canvas.height);
+
+      // プレイヤークラスのdraw関数の呼び出し
+      player.draw();
+
+      // projectilesの配列分繰り返す
+      projectiles.forEach((projectile) => {
+
+        // projectileのupdate関数の呼び出し
+        projectile.update();
+      });
+
+      // enemiesの配列分繰り返す
+      enemies.forEach((enemy) => {
+        enemy.update();
+      });
+    }
+
+    // 画面をクリックした際の挙動
+    addEventListener('click', (event) => {
+
+      // クリックされた位置が中心からみて、どの角度にあるかを計算
+      const angle = Math.atan2(event.clientY - canvas.height / 2, event.clientX - canvas.width / 2);
+
+      // 角度をX,Y座標に代入
+      const velocity = {
+        x: Math.cos(angle),
+        y: Math.sin(angle)
+      }
+
+      // projectiles要素に作成したprojectileクラスを代入
+      projectiles.push(new Projectile(
+        canvas.width / 2,
+        canvas.height / 2,
+        5,
+        'red',
+        velocity
+      ));
+    });
+
+    // spawnEnemies関数の呼び出し
+    spawnEnemies();
+
+    // アニメーション関数の呼び出し
+    animate();
   }
 
   brainTrainingQuestion5 = function() {
