@@ -217,7 +217,7 @@ $(function() {
   brainTrainingQuestion4 = function() {
 
     // キャンバス要素を取得
-    const canvas = $("#brain-training-box")[0];
+    const canvas = document.querySelector("#brain-training-box");
 
     // キャンバスに記載するコンテキストを取得(二次元グラフィックの描画のため、2d指定)
     const c = canvas.getContext('2d');
@@ -225,6 +225,18 @@ $(function() {
     // 横幅と高さにキャンバス要素の横幅と高さを代入
     canvas.width = c.canvas.width; // 横幅
     canvas.height = c.canvas.height; // 高さ
+
+    // スコアの要素を取得
+    const scoreEl = document.querySelector("#scoreEl");
+
+    // スタートボタンの要素を取得
+    const startGameBtn = document.querySelector("#startGameBtn");
+
+    // モーダルウインドウの要素を取得
+    const modalEl = document.querySelector("#modalEl");
+
+    // ビッグスコアの取得
+    const bigScoreEl = document.querySelector("#bigScoreEl");
 
     // プレイヤークラス
     class Player {
@@ -345,16 +357,26 @@ $(function() {
     const y = canvas.height / 2; // Y座標の指定
 
     // プレイヤークラスの作成
-    const player = new Player(x, y, 10, 'white');
+    let player = new Player(x, y, 10, 'white');
 
     // プロジェクターズ要素に配列を代入
-    const projectiles = [];
+    let projectiles = [];
 
     // エネミーズ要素に配列を代入
-    const enemies = [];
+    let enemies = [];
 
     // パーシャルズ要素に配列を代入
-    const particles = [];
+    let particles = [];
+
+    function init() {
+      player = new Player(x, y, 10, 'white');
+      projectiles = [];
+      enemies = [];
+      particles = [];
+      score = 0;
+      scoreEl.innerHTML = score;
+      bigScoreEl.innerHTML = score;
+    }
 
     // エネミーを生成する関数
     function spawnEnemies() {
@@ -400,6 +422,9 @@ $(function() {
 
     // アニメーションのリクエストが入る変数
     let animationId;
+
+    // スコアに0を代入
+    let score = 0;
 
     // アニメーション関数
     function animate() {
@@ -456,6 +481,10 @@ $(function() {
 
           // アニメーションを止める
           cancelAnimationFrame(animationId);
+
+          // ゲームオーバー用のモーダルを表示
+          modalEl.style.display = "block"
+          bigScoreEl.innerHTML = score;
         }
 
         // projectileの配列分繰り返す
@@ -481,6 +510,11 @@ $(function() {
 
             // もし敵の大きさが15以上だったら
             if (enemy.radius - 10 > 5) {
+
+              // 敵を倒したとき
+              score += 100;
+              scoreEl.innerHTML = score;
+
               gsap.to(enemy, {
                 // 敵の大きさを-10する
                 radius: enemy.radius - 10
@@ -491,6 +525,11 @@ $(function() {
                 projectiles.splice(projectileIndex, 1);
               }, 0)
             } else {
+
+              // 敵を倒したとき
+              score += 250;
+              scoreEl.innerHTML = score;
+
               // 0秒後に処理を行う
               setTimeout(function() {
                 // enemiesからenemyIndex番目の要素を1つ削除する
@@ -523,6 +562,14 @@ $(function() {
         'white',
         velocity
       ));
+    });
+
+    // スタートゲームボタンを押したときの挙動
+    $(startGameBtn).on("click", function() {
+      init();
+      modalEl.style.display = 'none';
+      spawnEnemies();
+      animate();
     });
 
     // spawnEnemies関数の呼び出し
