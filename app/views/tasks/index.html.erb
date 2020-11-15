@@ -12,6 +12,21 @@
   <%= link_to "新規登録", new_task_path, class: "nav-link" %>
 </div>
 
+<div class="row justify-content-end">
+  <%= search_form_for @q, class: "mb-5" do |f| %>
+    <div class="form-inline">
+      <%= f.label :title_cont, "タイトル", class: "my-1 mr-2" %>
+      <%= f.search_field :title_cont, class: "my-1 mr-sm-2" %>
+      <%= f.submit  "検索", class: "btn btn-primary my-1" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="mb-3">
+  <%= paginate @tasks %>
+  <%= page_entries_info @tasks %>
+</div>
+
 <table class="table">
   <thead class="thead-default">
     <tr>
