@@ -1,0 +1,9 @@
+<%= render partial: "header" %>
+
+<h1>アカウント新規登録</h1>
+
+<div class="nav justify-content-end">
+  <%= link_to "一覧", users_path, class: "nav-link" %>
+</div>
+
+<%= render partial: "form", locals: { user: @user } %>

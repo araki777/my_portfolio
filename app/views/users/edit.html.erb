@@ -1,0 +1,11 @@
+<%= render partial: "header" %>
+
+<h1>アカウントの編集</h1>
+
+<div class="nav justify-content-end">
+  <%= link_to "一覧", users_path, class: "nav-link" %>
+</div>
+
+<%= render partial: "form", locals: { user: @user } %>
+
+<%= link_to "アカウント削除", @user, method: :delete, data: { confirm: "タスク「#{@user.name}」を削除します。よろしいですか？" }, class: "btn btn-danger m-3" %>

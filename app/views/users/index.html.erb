@@ -1,0 +1,32 @@
+<%= render partial: "header" %>
+
+<h1>アカウント一覧</h1>
+
+<div class="nav justify-content-end">
+  <%= link_to "新規登録", new_user_path, class: "nav-link" %>
+</div>
+
+<table class="table">
+  <thead class="thead-default">
+    <tr>
+      <th>名前</th>
+      <th>登録日</th>
+      <th>編集日</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td>
+          <%= link_to user.name, user %>
+        </td>
+        <td>
+          <%= user.created_at %>
+        </td>
+        <td>
+          <%= user.updated_at %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
