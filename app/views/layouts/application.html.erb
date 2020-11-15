@@ -17,6 +17,10 @@
     <%# jqueryの導入 %>
     <%= javascript_include_tag 'jquery-3.5.1.min.js' %>
 
+    <%# bootstrapの導入  gemでは入れたが効かなかったため %>
+    <%= stylesheet_link_tag 'bootstrap.min.css' %>
+    <%= javascript_include_tag 'bootstrap.min.js' %>
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= yield(:html_head) if content_for?(:html_head) %>
