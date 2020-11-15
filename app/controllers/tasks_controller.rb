@@ -13,7 +13,8 @@ class TasksController < ApplicationController
   def create
     @task = current_user.tasks.new(task_params)
     if @task.save
-      redirect_to tasks_url, notice: "タスク「#{@task.title}」を登録しました。"
+      flash[:success] = "タスク「#{@task.title}」を登録しました。"
+      redirect_to tasks_url
     else
       render :new
     end
@@ -27,7 +28,8 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to tasks_url, notice: "タスク「#{@task.title}」を更新しました！"
+      flash[:success] = "タスク「#{@task.title}」を更新しました！"
+      redirect_to tasks_url
     else
       render :edit
     end
@@ -35,7 +37,8 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to tasks_url, notice: "タスク「#{@task.title}」を削除しました。"
+    flash[:warning] = "タスク「#{@task.title}」を削除しました。"
+    redirect_to tasks_url
   end
 
   private

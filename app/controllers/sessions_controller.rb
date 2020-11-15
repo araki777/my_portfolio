@@ -9,15 +9,18 @@ class SessionsController < ApplicationController
 
     if user&.authenticate(session_params[:password])
       session[:user_id] = user.id
-      redirect_to root_url, notice: "ログインしました"
+      flash[:success] = "ログインしました"
+      redirect_to root_url
     else
+      flash.now[:danger] = "メールアドレスとパスワードの組み合わせが存在しません"
       render :new
     end
   end
 
   def destroy
     reset_session
-    redirect_to login_url, notice: "ログアウトしました"
+    flash[:success] = "ログアウトしました"
+    redirect_to login_url
   end
 
   private
