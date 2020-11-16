@@ -1,0 +1,70 @@
+<% flash.each do |message_type, message| %>
+  <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+<% end %>
+
+<%= render partial: "header" %>
+
+<ul class="nav nav-tabs mb-3">
+  <li class="nav-item">
+    <%= link_to "新規登録", new_task_path, class: "nav-link" %>
+  </li>
+  <li>
+    <%= link_to "Todoリスト", todo_tasks_path, class: "nav-link" %>
+  </li>
+  <li>
+    <%= link_to "Doneリスト", done_tasks_path, class: "nav-link" %>
+  </li>
+</ul>
+
+<div class="nav justify-content-end">
+  <%= link_to "新規登録", new_task_path, class: "nav-link" %>
+</div>
+
+<div class="row justify-content-end">
+  <%= search_form_for @q, class: "mb-5" do |f| %>
+    <div class="form-inline">
+      <%= f.label :title_cont, "タイトル", class: "my-1 mr-2" %>
+      <%= f.search_field :title_cont, class: "my-1 mr-sm-2" %>
+      <%= f.submit  "検索", class: "btn btn-primary my-1" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="mb-3">
+  <%= paginate @tasks %>
+  <%= page_entries_info @tasks %>
+</div>
+
+<table class="table">
+  <thead class="thead-default">
+    <tr>
+      <th>状況</th>
+      <th>タイトル</th>
+      <th>登録日</th>
+      <th>編集日</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td>
+          <%= task.done? ? 'Done' : 'Todo' %>
+        </td>
+        <td>
+          <%= link_to task.title, task %>
+        </td>
+        <td>
+          <%= task.created_at %>
+        </td>
+        <td>
+          <%= task.updated_at %>
+        </td>
+        <td>
+          <%= link_to "編集", edit_task_path(task), class: "btn btn-primary mr-3" %>
+          <%= link_to "削除", task, method: :delete, data: { confirm: "タスク「#{task.title}」を削除します。よろしいですか？" }, class: "btn btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

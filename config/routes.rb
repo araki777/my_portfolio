@@ -6,5 +6,9 @@ Rails.application.routes.draw do
   root 'main#index'
   get :brain_training, to: 'brain_training#index'
   resources :users
-  resources :tasks
+  resources :tasks do
+    collection do
+      get :todo, :done
+    end
+  end
 end

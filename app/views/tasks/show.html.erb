@@ -5,7 +5,11 @@
 <h1>タスクの詳細</h1>
 
 <div class="nav justify-content-end">
-  <%= link_to "一覧", tasks_path, class: "nav-link" %>
+  <% if @task.done? %>
+    <%= link_to "Done一覧", done_tasks_path, class: "nav-link" %>
+  <% else %>
+    <%= link_to "Todo一覧", todo_tasks_path, class: "nav-link" %>
+  <% end %>
 </div>
 
 <table class="table table-hover">

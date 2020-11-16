@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class SessionsController < TasksManagerController
   skip_before_action :login_required
 
   def new
@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     if user&.authenticate(session_params[:password])
       session[:user_id] = user.id
       flash[:success] = "ログインしました"
-      redirect_to root_url
+      redirect_to todo_tasks_url
     else
       flash.now[:danger] = "メールアドレスとパスワードの組み合わせが存在しません"
       render :new

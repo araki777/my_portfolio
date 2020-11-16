@@ -6,3 +6,6 @@ ja:
       task:
         title: タイトル
         description: 詳しい説明
+        times:
+          formats:
+            default: "%Y年%m月%d日"

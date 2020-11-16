@@ -1,8 +1,13 @@
-class TasksController < ApplicationController
+class TasksController < TasksManagerController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
-  def index
-    @q = current_user.tasks.ransack(params[:q])
+  def todo
+    @q = current_user.tasks.where(done: false).ransack(params[:q])
+    @tasks = @q.result(distinct: true).recent.page(params[:page]).per(10)
+  end
+
+  def done
+    @q = current_user.tasks.where(done: true).ransack(params[:q])
     @tasks = @q.result(distinct: true).recent.page(params[:page]).per(10)
   end
 

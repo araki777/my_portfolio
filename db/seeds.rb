@@ -6,6 +6,22 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+users = User.all
+
+# todoタスク
+15.times do
+    title = Faker::Beer.brand
+    description = Faker::Movies::BackToTheFuture.quote
+    users.each { |user| user.tasks.create!(title: title, description:description) }
+end
+
+# doneタスク
+15.times do
+  title = Faker::Beer.brand
+  description = Faker::Movies::BackToTheFuture.quote
+  users.each { |user| user.tasks.create!(title: title, description: description, done: true) }
+end
+
 # ユーザー
 User.create!(
   [
@@ -29,11 +45,3 @@ User.create!(
     },
   ]
 )
-
-# タスク
-users = User.all
-30.times do
-  title = Faker::JapaneseMedia::SwordArtOnline.game_name
-  description = Faker::JapaneseMedia::SwordArtOnline.location
-  users.each { |user| user.tasks.create!(title: title, description: description) }
-end
