@@ -6,6 +6,9 @@ ja:
       task:
         title: タイトル
         description: 詳しい説明
+        priority: 優先度
+        category: カテゴリー
+        rate: 進捗率
         times:
           formats:
             default: "%Y年%m月%d日"

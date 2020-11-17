@@ -1,3 +1,208 @@
 // Place all the styles related to the tasks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+ul {
+  margin: 0;
+}
+
+a {
+  cursor: pointer;
+}
+
+// ヘッダーメニューのCSS
+.header {
+  background: #C0C0C0;
+  border-top: 1px solid  rgba(52, 58, 64, .5);
+  border-bottom: 1px solid rgba(52, 58, 64, .5);
+
+  .header-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: .8rem;
+    padding-right: .8rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    .header-start {
+      font-weight: bold;
+      font-size: 20px;
+
+      a {
+        color: #222;
+        text-decoration: none;
+      }
+    }
+
+    .header-end {
+      display: flex;
+      align-items: center;
+
+      .header-nav-wrapper {
+        display: flex;
+        list-style: none;
+        padding: 0;
+
+        .header-nav-item {
+          display: block;
+          padding: 1.5rem 1rem;
+
+          .text {
+            line-height: 2;
+          }
+
+          a {
+            text-decoration: none;
+            color: #222;
+          }
+
+          .button {
+            min-width: initial;
+            padding: .2rem 1.2rem;
+            appearance: none;
+            color: #fff;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+          }
+
+          .login-button {
+            background: #2fa0f6;
+          }
+
+          .logout-button {
+            background: red;
+          }
+
+          .active {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 左のサイドメニューバーのCSS
+.sidebar-wrapper {
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background: #0f0e17;
+}
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  margin: 5rem 0 0 0;
+  padding: 0;
+  list-style: none;
+
+  &-item {
+    font-size: 1.5rem;
+    margin-bottom: 3rem;
+
+    a {
+      display: block;
+      text-decoration: none;
+      color: #fff;
+      padding: .8rem;
+
+      &:hover {
+        background: rgba(52, 58, 64, .5);
+      }
+    }
+
+    svg {
+      margin-right: .8rem;
+    }
+  }
+}
+
+// indexページのCSS
+#task-page-container {
+  position: fixed;
+  width: calc(100% - 250px);
+  height: 100%;
+  left: 250px;
+  padding: 3rem;
+  overflow-y: scroll;
+
+  h1 {
+    margin-bottom: 20px;
+  }
+
+  .main-top-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .pagination {
+      margin: 0 0 10px;
+    }
+
+    .main-search-content {
+      float: right;
+
+      .search-field {
+        border: 1px solid #999;
+        padding: 3px 10px;
+        border-radius: 3px;
+        width: 21rem;
+        height: 2.2em;
+        overflow: hidden;
+
+        &:focus {
+          outline: 0;
+          height: 2.0em;
+        }
+      }
+
+      .search-button {
+        cursor: pointer;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        font-size: 1.2em;
+        border: none;
+        background: #3879D9;
+        border: 1px solid #3879D9;
+        border-radius: 3px;
+        color: #fff;
+        outline: none;
+        width: 3.5em;
+        height: 1.8em;
+        display: inline-block;
+      }
+    }
+  }
+
+  .table {
+    margin-top: 50px;
+  }
+
+  // newページのCSS
+  .form {
+    margin-top: 11rem;
+
+    .form-check {
+      padding: 0;
+
+      .form-check-text {
+        margin-left: 15px;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 4rem;
+    }
+
+    .btn {
+      float: right;
+    }
+  }
+}

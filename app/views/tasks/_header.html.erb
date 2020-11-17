@@ -1,22 +1,28 @@
-<header class="mb-3">
-  <div class="navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="navbar-brand">TodoApp</div>
-    <ul class="navbar-nav ml-auto">
-      <% if current_user %>
-        <li class="nav-item">
-          <%= link_to "Tasks", tasks_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Users", users_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "logout", logout_path, method: :delete, class: "nav-link" %>
-        </li>
-      <% else %>
-        <li class="nav-item">
-          <%= link_to "login", login_path, class: "nav-link" %>
-        </li>
-      <% end %>
-    </ul>
+<header class="header">
+  <div class="header-wrapper">
+    <div class="header-start">
+      <a href="#"><em>TaskManager</em></a>
+    </div>
+    <div class="header-end">
+      <nav class="header-nav">
+        <ul class="header-nav-wrapper">
+          <% if current_user %>
+            <li class="header-nav-item">
+              <%= link_to "タスク一覧", main_tasks_path %>
+            </li>
+            <li class="header-nav-item">
+              <%= link_to "ユーザー一覧", users_path %>
+            </li>
+            <li class="header-nav-item">
+              <%= link_to "ログアウト", logout_path, method: :delete %>
+            </li>
+          <% else %>
+            <li class="header-nav-item">
+              <%= link_to "ログイン", login_path %>
+            </li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
   </div>
 </header>

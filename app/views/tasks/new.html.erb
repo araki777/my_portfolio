@@ -1,7 +1,16 @@
-<h1>タスク新規登録</h1>
+<%= content_for(:html_head) do %>
+  <%= stylesheet_link_tag "tasks" %>
+  <%= javascript_include_tag "tasks" %>
+<% end %>
 
-<div class="nav justify-content-end">
-  <%= link_to "一覧", tasks_path, class: "nav-link" %>
+<%# ヘッダー %>
+<%= render partial: "header" %>
+
+<%# サイドバー %>
+<%= render partial: "sidebar" %>
+
+<div id="task-page-container">
+  <h1>タスクの追加</h1>
+
+  <%= render partial: "form", locals: { task: @task } %>
 </div>
-
-<%= render partial: "form", locals: { task: @task } %>

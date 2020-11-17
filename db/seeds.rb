@@ -9,18 +9,11 @@
 users = User.all
 
 # todoタスク
-15.times do
-    title = Faker::Beer.brand
-    description = Faker::Movies::BackToTheFuture.quote
-    users.each { |user| user.tasks.create!(title: title, description:description) }
-end
-
-# doneタスク
-15.times do
-  title = Faker::Beer.brand
-  description = Faker::Movies::BackToTheFuture.quote
-  users.each { |user| user.tasks.create!(title: title, description: description, done: true) }
-end
+# 15.times do
+#     title = Faker::Beer.brand
+#     description = Faker::Movies::BackToTheFuture.quote
+#     users.each { |user| user.tasks.create!(title: title, description:description) }
+# end
 
 # ユーザー
 User.create!(
