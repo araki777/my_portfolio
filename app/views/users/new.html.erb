@@ -1,9 +1,13 @@
-<%= render partial: "header" %>
+<%= content_for(:html_head) do %>
+  <%= stylesheet_link_tag "users" %>
+<% end %>
 
-<h1>アカウント新規登録</h1>
+<div class="user-create-container">
+  <div class="user-create-container-inner">
+    <div class="user-create-content">
+      <h1>TaskManagerを始めましょう</h1>
 
-<div class="nav justify-content-end">
-  <%= link_to "一覧", users_path, class: "nav-link" %>
+      <%= render partial: "form", locals: { user: @user } %>
+    </div>
+  </div>
 </div>
-
-<%= render partial: "form", locals: { user: @user } %>

@@ -1,4 +1,5 @@
 class UsersController < TasksManagerController
+  skip_before_action :login_required, only: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
@@ -16,8 +17,9 @@ class UsersController < TasksManagerController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = "ユーザー「#{@user.name}」を登録しました。"
-      redirect_to users_url
+      session[:user_id] = @user.id
+      flash[:success] = "ユーザー「#{@user.name}」でログインしました。"
+      redirect_to main_tasks_path
     else
       render :new
     end

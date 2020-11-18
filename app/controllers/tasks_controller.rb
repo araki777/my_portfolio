@@ -20,8 +20,8 @@ class TasksController < TasksManagerController
   }
 
   def main
-    @q = current_user.tasks.ransack(params[:q])
-    @tasks = @q.result(distinct: true).recent.page(params[:page]).per(10)
+    @q = current_user.tasks.where.not(rate: 10).ransack(params[:q])
+    @tasks = @q.result(distinct: true).order(created_at: :DESC).page(params[:page]).per(10)
   end
 
   def new
@@ -30,7 +30,9 @@ class TasksController < TasksManagerController
 
   def create
     @task = current_user.tasks.new(task_params)
-    if @task.save
+    is_parent_record = current_user.tasks.exists?(parent_task_id: nil, id: @task.parent_task_id)
+    if is_parent_record || (@task.parent_task_id == nil)
+      @task.save
       flash[:success] = "タスク「#{@task.title}」を登録しました。"
       redirect_to main_tasks_path
     else
@@ -39,6 +41,7 @@ class TasksController < TasksManagerController
   end
 
   def show
+    @children_task = current_user.tasks.where(parent_task_id: params[:id])
   end
 
   def edit
@@ -59,10 +62,25 @@ class TasksController < TasksManagerController
     redirect_to main_tasks_path
   end
 
+  def search
+    selection = params[:task][:keyword]
+    @q = current_user.tasks.ransack(params[:q]).result(distinct: true)
+    @tasks = case selection
+    when 'new'
+      @q.order(created_at: :DESC).page(params[:page]).per(10)
+    when 'old'
+      @q.order(created_at: :ASC).page(params[:page]).per(10)
+    when 'priority'
+      @q.order(priority: :ASC).page(params[:page]).per(10)
+    when 'rate'
+      @q.order(rate: :DESC).page(params[:page]).per(10)
+    end
+  end
+
   private
 
   def task_params
-    params.require(:task).permit(:title, :description, :priority, :category, :rate, :image)
+    params.require(:task).permit(:title, :description, :priority, :category, :rate, :parent_task_id, :image)
   end
 
   def set_task

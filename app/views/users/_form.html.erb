@@ -1,9 +1,9 @@
-<% if user.errors.present? %>
-  <div id="#error_explanation">
+<% if user.errors.any? %>
+  <div id="error_explanation">
     <div class="alert alert-danger">
-      <%= "#{task.errors.count}種類のエラーがあります" %>
+      <%= "#{user.errors.count}種類のエラーがあります" %>
       <ul>
-        <% user_errors.full_messages.each do |message| %>
+        <% user.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -28,5 +28,5 @@
     <%= f.label :password_confirmation, "パスワード（確認）" %>
     <%= f.password_field :password_confirmation, class: "form-control" %>
   </div>
-  <%= f.submit "登録", class: "btn btn-success" %>
+  <%= f.submit "新規登録", class: "button" %>
 <% end %>

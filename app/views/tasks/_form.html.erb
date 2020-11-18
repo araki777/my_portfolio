@@ -36,5 +36,10 @@
     <%= f.label :rate, "進捗率" %>
     <%= f.select :rate, [["0%", 0], ["10%", 1], ["20%", 2], ["30%", 3], ["40%", 4], ["50%", 5], ["60%", 6], ["70%", 7], ["80%", 8], ["90%", 9], ["100%", 10]], include_blank: "選択してください", id: "task_rate" %>
   </div>
+  <% if page == "new" %>
+    <%= f.label :parent_task_id, "親タスクID" %>
+    <%= f.number_field :parent_task_id, min: 1, id: "parent_task_id" %>
+  <% else %>
+  <% end %>
   <%= f.submit "登録", class: "btn btn-success" %>
 <% end %>

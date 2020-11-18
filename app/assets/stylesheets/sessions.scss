@@ -28,7 +28,7 @@
   text-align: center;
   font-family: 'Volkhov-Italic.ttf, sans-serif';
   margin-top: 5rem;
-  margin-bottom: 10rem;
+  margin-bottom: 5rem;
   font-weight: bold;
 }
 
@@ -71,5 +71,33 @@
     text-transform: uppercase;
     transition: background 0.3s ease-in-out;
     width: 100%;
+  }
+}
+
+.registration-and-guest-container {
+  width: 80%;
+  margin: 50px auto 0;
+  display: flex;
+  justify-content: space-around;
+
+  .button {
+    width: 35%;
+    text-align: center;
+    border-radius: 18px;
+    text-decoration: none;
+
+    div {
+      height: 40px;
+      line-height: 3;
+      color: #fff;
+    }
+  }
+
+  .new-registration-button {
+    background: #8095CE;
+  }
+
+  .guest-login-button {
+    background: #80BEAF;
   }
 }

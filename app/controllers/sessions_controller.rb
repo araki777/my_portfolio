@@ -4,6 +4,13 @@ class SessionsController < TasksManagerController
   def new
   end
 
+  def new_guest
+    user = User.guest
+    session[:user_id] = user.id
+    flash[:success] = "ゲストユーザーでログインしました"
+    redirect_to main_tasks_url
+  end
+
   def create
     user = User.find_by(email: session_params[:email])
 

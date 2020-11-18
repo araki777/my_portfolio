@@ -58,6 +58,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'bootstrap-sass'
 
+gem 'jquery-ui-rails'
+
+gem 'jquery-rails'
+
 gem 'faker'
 
 gem 'ransack'

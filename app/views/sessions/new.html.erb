@@ -9,14 +9,22 @@
     <h1 class="form-title">Task Manager</h1>
     <%= form_with scope: :session, local: true, class: "form" do |f| %>
       <div class="form-item">
-        <%= f.text_field :email, id: "session_email", placeholder: "Email Address" %>
+        <%= f.text_field :email, id: "session_email", placeholder: "メールアドレス" %>
       </div>
       <div class="form-item">
-        <%= f.password_field :password, id: "session_password", placeholder: "Password" %>
+        <%= f.password_field :password, id: "session_password", placeholder: "パスワード" %>
       </div>
       <div class="signin-button">
-        <%= f.submit "Sign In", class: "button" %>
+        <%= f.submit "ログイン", class: "button" %>
       </div>
     <% end %>
+    <div class="registration-and-guest-container">
+      <%= link_to new_user_path, class: "button new-registration-button" do %>
+        <div>新規登録</div>
+      <% end %>
+      <%= link_to guest_login_path, class: "button guest-login-button", method: :post do %>
+        <div>ゲストユーザー(閲覧用)</div>
+      <% end %>
+    </div>
   </div>
 </div>

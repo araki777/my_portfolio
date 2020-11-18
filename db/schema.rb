@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2020_11_15_145146) do
     t.integer "priority", null: false
     t.integer "category", null: false
     t.integer "rate", null: false
+    t.integer "parent_task_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
