@@ -11,7 +11,6 @@ a {
 
 // ヘッダーメニューのCSS
 .header {
-  background: #C0C0C0;
   border-top: 1px solid  rgba(52, 58, 64, .5);
   border-bottom: 1px solid rgba(52, 58, 64, .5);
 
@@ -85,6 +84,27 @@ a {
     }
   }
 }
+.header-bg-1 {
+  background: #C0C0C0;
+}
+.header-bg-2 {
+  background: #009c75;
+}
+.header-bg-3 {
+  background: #3F1515;
+}
+.header-bg-4 {
+  background: #FBC78D;
+}
+.header-bg-5 {
+  background: #fff;
+}
+.header-bg-6 {
+  background: #B1BEEA;
+}
+.header-bg-7 {
+  background: #FB93AC;
+}
 
 // 左のサイドメニューバーのCSS
 .sidebar-wrapper {
@@ -93,7 +113,6 @@ a {
   left: 0;
   width: 250px;
   height: 100%;
-  background: #0f0e17;
 }
 .sidebar-nav {
   position: absolute;
@@ -122,6 +141,27 @@ a {
       margin-right: .8rem;
     }
   }
+}
+.sidebar-bg-1 {
+  background: #0f0e17;
+}
+.sidebar-bg-2 {
+  background: #93c0e7;
+}
+.sidebar-bg-3 {
+  background: #939369;
+}
+.sidebar-bg-4 {
+  background: #B3DDD1;
+}
+.sidebar-bg-5 {
+  background: #FFC4C8;
+}
+.sidebar-bg-6 {
+  background: #6F89A2;
+}
+.sidebar-bg-7 {
+  background: #A7D676;
 }
 
 // indexページのCSS
@@ -205,4 +245,9 @@ a {
       float: right;
     }
   }
+}
+
+.bg-change-container {
+  display: flex;
+  justify-content: space-between;
 }

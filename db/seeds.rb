@@ -23,18 +23,21 @@ User.create!(
       email: 'panda@example',
       password: 'password',
       password_confirmation: 'password',
+      bg_color_id: 1
     },
     {
       name: 'rakuda',
       email: 'rakuda@example.com',
       password: 'password',
-      password_confirmation: 'password'
+      password_confirmation: 'password',
+      bg_color_id: 1
     },
     {
       name: 'tamanegi',
       email: 'tamanegi@example.com',
       password: 'password',
-      password_confirmation: 'password'
+      password_confirmation: 'password',
+      bg_color_id: 1
     },
   ]
 )

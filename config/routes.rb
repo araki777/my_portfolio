@@ -19,9 +19,11 @@ Rails.application.routes.draw do
   resources :tasks do
     collection do
       get :main
-      get :auto_complite
     end
   end
+
+  get :configuration, to: 'tasks#configuration'
+  post :configuration_update, to: 'tasks#configuration_update'
 
   get :search, to: 'tasks#search'
 end

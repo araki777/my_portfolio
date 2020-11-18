@@ -15,7 +15,7 @@ class UsersController < TasksManagerController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(user_params.merge(bg_color_id: 1))
     if @user.save
       session[:user_id] = @user.id
       flash[:success] = "ユーザー「#{@user.name}」でログインしました。"

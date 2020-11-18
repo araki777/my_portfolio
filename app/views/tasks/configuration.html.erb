@@ -1,0 +1,98 @@
+<%= content_for(:html_head) do %>
+  <%= stylesheet_link_tag "tasks" %>
+  <%= javascript_include_tag "tasks" %>
+<% end %>
+
+<%# ヘッダー %>
+<%= render partial: "header" %>
+
+<%# サイドバー %>
+<%= render partial: "sidebar" %>
+
+<div id="task-page-container">
+  <h1>設定</h1>
+
+  <table class="table">
+    <thead class="thead-default">
+      <tr>
+        <th>壁紙スタイル</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="bg-change-container">
+          <div>デフォルト</div>
+          <% if current_user.bg_color_id != 1 %>
+            <%= button_to "適用", { action: "configuration_update" }, { params: { bg_color_id: 1 } } %>
+          <% else %>
+            <div>適用済み</div>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td class="bg-change-container">
+          <div>ハワイアン</div>
+          <% if current_user.bg_color_id != 2 %>
+            <%= button_to "適用", { action: "configuration_update" }, { params: { bg_color_id: 2 } } %>
+          <% else %>
+            <div>適用済み</div>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td class="bg-change-container">
+          <div>レトロ</div>
+          <% if current_user.bg_color_id != 3 %>
+            <%= button_to "適用", { action: "configuration_update" }, { params: { bg_color_id: 3 } } %>
+          <% else %>
+            <div>適用済み</div>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td class="bg-change-container">
+          <div>パステル</div>
+          <% if current_user.bg_color_id != 4 %>
+            <%= button_to "適用", { action: "configuration_update" }, { params: { bg_color_id: 4 } } %>
+          <% else %>
+            <div>適用済み</div>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td class="bg-change-container">
+          <div>スイート</div>
+          <% if current_user.bg_color_id != 5 %>
+            <%= button_to "適用", { action: "configuration_update" }, { params: { bg_color_id: 5 } } %>
+          <% else %>
+            <div>適用済み</div>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td class="bg-change-container">
+          <div>ウインター</div>
+          <% if current_user.bg_color_id != 6 %>
+            <%= button_to "適用", { action: "configuration_update" }, { params: { bg_color_id: 6 } } %>
+          <% else %>
+            <div>適用済み</div>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td class="bg-change-container">
+          <div>スプリング</div>
+          <% if current_user.bg_color_id != 7 %>
+            <%= button_to "適用", { action: "configuration_update" }, { params: { bg_color_id: 7 } } %>
+          <% else %>
+            <div>適用済み</div>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<%= javascript_tag do %>
+
+<% end %>

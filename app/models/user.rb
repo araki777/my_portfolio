@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
+  validates :bg_color_id, presence: true
 
   has_many :tasks
 
