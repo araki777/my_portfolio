@@ -64,16 +64,16 @@ class TasksController < TasksManagerController
 
   def search
     selection = params[:task][:keyword]
-    @q = current_user.tasks.ransack(params[:q]).result(distinct: true)
+    @q = current_user.tasks.ransack(params[:q])
     @tasks = case selection
     when 'new'
-      @q.order(created_at: :DESC).page(params[:page]).per(10)
+      @q.result(distinct: true).order(created_at: :DESC).page(params[:page]).per(10)
     when 'old'
-      @q.order(created_at: :ASC).page(params[:page]).per(10)
+      @q.result(distinct: true).order(created_at: :ASC).page(params[:page]).per(10)
     when 'priority'
-      @q.order(priority: :ASC).page(params[:page]).per(10)
+      @q.result(distinct: true).order(priority: :ASC).page(params[:page]).per(10)
     when 'rate'
-      @q.order(rate: :DESC).page(params[:page]).per(10)
+      @q.result(distinct: true).order(rate: :DESC).page(params[:page]).per(10)
     end
   end
 
@@ -87,7 +87,7 @@ class TasksController < TasksManagerController
       flash[:warning] = "壁紙を適用できませんでした"
     end
 
-    render :configuration
+    redirect_to configuration_tasks_path
   end
 
   private

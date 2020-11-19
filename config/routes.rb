@@ -15,15 +15,19 @@ Rails.application.routes.draw do
   # ユーザー管理ページ
   resources :users
 
+  # グループ画面
+  resources :groups do
+    resources :messages, only: [:index, :create]
+  end
+
   # タスク管理ページ
   resources :tasks do
     collection do
       get :main
+      get :configuration
+      post :configuration_update
     end
   end
-
-  get :configuration, to: 'tasks#configuration'
-  post :configuration_update, to: 'tasks#configuration_update'
 
   get :search, to: 'tasks#search'
 end

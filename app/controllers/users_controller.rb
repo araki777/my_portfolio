@@ -50,7 +50,7 @@ class UsersController < TasksManagerController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :bg_color_id)
   end
 
   def correct_user

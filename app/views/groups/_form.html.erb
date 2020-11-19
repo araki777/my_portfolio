@@ -1,0 +1,40 @@
+<%= form_for @group do |f| %>
+  <% if @group.errors.any? %>
+    <div class="chat-group-form-errors">
+      <h2>
+        <%= "#{@group.errors.full_messages.count}件のエラーが発生しました。" %>
+      </h2>
+      <ul>
+        <% @group.errors.full_messages.each do |message| %>
+          <li>
+            <%= message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="chat-group-form-field">
+    <div class="chat-group-form-field-left">
+      <%= f.label :name, "グループ名", class: "chat-group-form-label" %>
+    </div>
+    <div class="chat-group-form-field-right">
+      <%= f.text_field :name, class: "chat-group-name chat-group-form-input", placeholder: "グループ名を入力してください" %>
+    </div>
+  </div>
+  <div class="chat-group-form-field clearfix">
+  </div>
+  <div class="chat-group-form-field clearfix">
+    <div class="chat-group-form-field-left">
+      <%= f.label "チャットメンバー", class: "chat-group-form-label" %>
+    </div>
+    <div class="chat-group-form-field-right">
+      <%= f.collection_check_boxes :user_ids, User.all, :id, :name %>
+    </div>
+  </div>
+  <div class="chat-group-form-field clearfix">
+    <div class="chat-group-form-field-left"></div>
+    <div class="chat-group-form-field-right">
+      <%= f.submit class: "chat-group-form-action-btn" %>
+    </div>
+  </div>
+<% end %>

@@ -4,12 +4,17 @@
 <% end %>
 
 <%# ヘッダー %>
-<%= render partial: "header" %>
+<%= render partial: "shared/header" %>
 
 <%# サイドバー %>
-<%= render partial: "sidebar" %>
+<%= render partial: "shared/sidebar" %>
 
-<div id="task-page-container">
+<div class="page-container">
+  <%# アクションメッセージ %>
+  <% flash.each do |message_type, message| %>
+    <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+  <% end %>
+
   <h1>設定</h1>
 
   <table class="table">

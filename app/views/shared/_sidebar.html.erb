@@ -14,13 +14,15 @@
       <% end %>
     </li>
     <li class="sidebar-nav-item">
-      <a><i class="fas fa-comment-dots"></i>メッセージ</a>
+      <%= link_to groups_path do %>
+        <i class="fas fa-comment-dots"></i>メッセージ
+      <% end %>
     </li>
     <li class="sidebar-nav-item">
       <a><i class="fas fa-pen"></i>Wiki</a>
     </li>
     <li class="sidebar-nav-item">
-      <%= link_to configuration_path do %>
+      <%= link_to configuration_tasks_path do %>
         <i class="fas fa-cogs"></i>設定
       <% end %>
     </li>
