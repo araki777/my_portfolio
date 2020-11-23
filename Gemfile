@@ -75,3 +75,7 @@ gem 'font-awesome-sass'
 gem 'carrierwave'
 
 gem 'mini_magick'
+
+group :production, :staging do
+  gem 'unicorn'
+end
