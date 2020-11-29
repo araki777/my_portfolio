@@ -10,7 +10,7 @@
   <div class="lower-message">
     <% if message.content.present? %>
       <p class="lower-message-content">
-        <%= message.content %>
+        <%= safe_join(message.content.split("\n"), tag(:br)) %>
       </p>
     <% end %>
     <%= image_tag message.image.url, class: "lower-message-image" if message.image.present? %>

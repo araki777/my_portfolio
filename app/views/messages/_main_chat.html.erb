@@ -6,7 +6,7 @@
   </div>
   <div class="message-form">
     <%= form_for [@group, @message], data: { behavior: 'room_speaker' } do |f| %>
-      <%= f.text_field :content, class: "form-message", placeholder: "メッセージを入力", autocomplete: "off" %>
+      <%= f.text_area :content, class: "form-message", placeholder: "メッセージを入力", autocomplete: "off" %>
       <div class="form-mask js-hover-trigger">
         <%= f.label :image, class: "form-mask-image" do %>
           <i class="fas fa-file-image"></i>
@@ -31,6 +31,19 @@
       } else {
         $(".form-mask").css("display", "none");
         $(".form-submit").css("display", "block");
+      }
+    });
+
+    $(document).on("keyup", "textarea", function(evt) {
+      var min_height = 50;
+      $(evt.target).innerHeight(min_height);
+      var r = $(evt.target).val().split("\n").length;
+      if (r <= 6) {
+        $(evt.target).innerHeight(evt.target.scrollHeight);
+        $(this).css("overflow-y", "hidden");
+      } else {
+        $(evt.target).innerHeight(150);
+        $(this).css("overflow-y", "scroll");
       }
     });
   });

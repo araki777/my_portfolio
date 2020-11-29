@@ -11,9 +11,7 @@
               <%= link_to "タスク一覧", main_tasks_path %>
             </li>
             <li class="header-nav-item">
-              <% if current_user.role == "super_admin" %>
-                <%= link_to "ユーザー一覧", users_path %>
-              <% end %>
+              <%= link_to "ユーザー一覧", users_path %>
             </li>
             <li class="header-nav-item">
               <%= link_to "ログアウト", logout_path, method: :delete %>
