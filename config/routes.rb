@@ -26,8 +26,7 @@ Rails.application.routes.draw do
       get :main
       get :configuration
       post :configuration_update
+      get :search
     end
   end
-
-  get :search, to: 'tasks#search'
 end

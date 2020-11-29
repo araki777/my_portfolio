@@ -1,8 +1,17 @@
+<%= content_for(:html_head) do %>
+  <%= stylesheet_link_tag "groups" %>
+<% end %>
+
 <%= render partial: "shared/header" %>
 <%= render partial: "shared/sidebar" %>
 
 <div class="page-container">
-  <h1>新規チャットグループ</h1>
 
-  <%= render partial: "form", locals: { group: @group } %>
+  <%= render 'shared/message_menu_bar' %>
+
+  <div class="message-page-container">
+    <h1>新規チャットグループ</h1>
+
+    <%= render partial: "form", locals: { group: @group } %>
+  </div>
 </div>

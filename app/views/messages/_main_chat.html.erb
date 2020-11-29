@@ -1,15 +1,37 @@
-<div class="form">
-  <%= form_for [@group, @message] do |f| %>
-    <%= f.text_field :content, class: "form-message", placeholder: "type a message" %>
-    <div class="form-mask">
-      <%= f.label :image, class: "form-mask-image" do %>
-        <%= icon('fas', 'image', class: 'icon') %>
-        <%= f.file_field :image, class: 'hidden' %>
-      <% end %>
+<div class="message-page-inner-container">
+  <div class="message-space-container">
+    <div class="messages">
+      <%= render @messages %>
     </div>
-    <%= f.submit "Send", class: "form-submit" %>
-  <% end %>
+  </div>
+  <div class="message-form">
+    <%= form_for [@group, @message], data: { behavior: 'room_speaker' } do |f| %>
+      <%= f.text_field :content, class: "form-message", placeholder: "メッセージを入力", autocomplete: "off" %>
+      <div class="form-mask js-hover-trigger">
+        <%= f.label :image, class: "form-mask-image" do %>
+          <i class="fas fa-file-image"></i>
+          <%= f.file_field :image, class: 'hidden' %>
+        <% end %>
+        <p class="box-text">ファイルを追加</p>
+      </div>
+      <%= f.button type: "submit", class: "form-submit js-hover-trigger" do %>
+        <i class="fas fa-paper-plane"></i>
+        <p class="box-text">メッセージを送信</p>
+      <% end %>
+    <% end %>
+  </div>
 </div>
-<div class="messages">
-  <%= render @messages %>
-</div>
+
+<%= javascript_tag do %>
+  $(function() {
+    $(".form-message").on("keyup", function() {
+      if ($(this).val() == "") {
+        $(".form-mask").css("display", "block");
+        $(".form-submit").css("display", "none");
+      } else {
+        $(".form-mask").css("display", "none");
+        $(".form-submit").css("display", "block");
+      }
+    });
+  });
+<% end %>

@@ -1,6 +1,10 @@
+<%= content_for(:html_head) do %>
+  <%= stylesheet_link_tag "groups" %>
+<% end %>
+
 <%= render partial: "shared/header" %>
 <%= render partial: "shared/sidebar" %>
 
 <div class="page-container">
-  <%= render 'shared/side_bar' %>
+  <%= render 'shared/message_menu_bar' %>
 </div>

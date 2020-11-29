@@ -1,3 +1,206 @@
 // Place all the styles related to the groups controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.page-container {
+  padding: 0;
+  overflow: hidden;
+}
+
+// グループメニューバーのデザイン
+.groups-menu-bar {
+  position: fixed;
+  z-index: 2;
+  left: 250;
+  width: 250px;
+  height: 100%;
+  background: #f2f2f2;
+
+  .groups-user {
+    width: 100%;
+    height: 80px;
+    border-bottom: 1px solid #000000;
+
+    &-title {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+
+      svg {
+        margin: 0 10px;
+      }
+
+      .groups-user-name {
+        font-size: 18px;
+      }
+    }
+  }
+
+  .groups-menu-list {
+    list-style: none;
+    padding: 0;
+    border-bottom: 1px solid #000;
+
+    li {
+      font-size: 17px;
+      padding-left: 10px;
+      margin: 3rem 0;
+
+      a {
+        outline: none;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .group-title {
+    font-size: 18px;
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  .groups {
+    overflow-y: scroll;
+    height: 100%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .group {
+      margin: 30px 10px;
+    }
+  }
+}
+
+.message-page-container {
+  width: calc(100% - 500px);
+  height: 100%;
+  position: fixed;
+  left: 500px;
+  padding: 3rem;
+}
+
+.chat-group-form-field {
+  margin-bottom: 3rem;
+  font-size: 15px;
+}
+
+.chat-group-name {
+  width: 300px;
+}
+
+.chat-group-form-field-right {
+  label {
+    margin-right: 10px;
+  }
+}
+
+.message-page-inner-container {
+  width: 100%;
+  height: 90%;
+  border: 1px solid #000;
+  position: relative;
+
+  .message-space-container {
+    width: 100%;
+    height: calc(100% - 100px);
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .message-form {
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    .new_message {
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      width: 50%;
+      top: 50%;
+      left: 0;
+      right: 0;
+      margin: auto;
+      transform: translateY(-50%);
+
+      .form-message {
+        width: 100%;
+        height: 50px;
+        background: #DDDDDD;
+        border-radius: 25px;
+        border: none;
+        padding-left: 20px;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      .form-mask {
+        width: 57px;
+        height: 50px;
+        position: relative;
+        border-radius: 50%;
+        background: #DDDDDD;
+        margin-left: 10px;
+
+        &-image {
+          width: 100%;
+          height: 100%;
+        }
+
+        svg {
+          position: absolute;
+          top: 50%;
+          left: 0;
+          right: 0;
+          margin: auto;
+          transform: translateY(-50%);
+        }
+      }
+
+      .form-submit {
+        display: none;
+        margin-left: 10px;
+        width: 57px;
+        height: 50px;
+        position: relative;
+        border-radius: 50%;
+        background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+        border: none;
+      }
+    }
+  }
+
+  .js-hover-trigger .box-text {
+    display: none;
+  }
+
+  .js-hover-trigger:hover .box-text {
+    display: block;
+    font-size: 10px;
+    width: 90px;
+    line-height: 2;
+    height: 20px;
+    position: absolute;
+    left: 45px;
+    bottom: -15px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #000;
+    color: #000;
+  }
+}

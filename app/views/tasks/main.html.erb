@@ -35,7 +35,7 @@
       <% end %>
     </div>
     <div class="aaa">
-      <%= form_with model: @tasks, url: search_path, method: :get, local: true do |f| %>
+      <%= form_with model: @tasks, url: search_tasks_path, method: :get, local: true do |f| %>
         <%= f.select :keyword, [['新着順', 'new'], ['古い順', 'old'], ['優先度順', 'priority'], ['進捗率順', 'rate']] %>
         <%= f.submit "並び替え" %>
       <% end %>
@@ -63,13 +63,13 @@
             <%= link_to task.title, task %>
           </td>
           <td>
-            <%= TasksController::Category_Name[task.category] %>
+            <%= Task::Category_Name[task.category] %>
           </td>
           <td>
-            <%= TasksController::Priority_Name[task.priority] %>
+            <%= Task::Priority_Name[task.priority] %>
           </td>
           <td>
-            <%= TasksController::Rate_Name[task.rate] %>
+            <%= Task::Rate_Name[task.rate] %>
           </td>
           <td>
             <%= task.created_at %>

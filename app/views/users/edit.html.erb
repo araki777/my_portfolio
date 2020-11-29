@@ -1,11 +1,16 @@
-<%= render partial: "header" %>
+<%= content_for(:html_head) do %>
+  <%= stylesheet_link_tag "users" %>
+  <%= javascript_include_tag "users" %>
+<% end %>
 
-<h1>アカウントの編集</h1>
+<%# ヘッダー %>
+<%= render partial: "shared/header" %>
 
-<div class="nav justify-content-end">
-  <%= link_to "一覧", users_path, class: "nav-link" %>
+<%# サイドバー %>
+<%= render partial: "shared/sidebar" %>
+
+<div class="page-container">
+  <h1>ユーザーの編集</h1>
+
+  <%= render partial: "form", locals: { user: @user } %>
 </div>
-
-<%= render partial: "form", locals: { user: @user } %>
-
-<%= link_to "アカウント削除", @user, method: :delete, data: { confirm: "タスク「#{@user.name}」を削除します。よろしいですか？" }, class: "btn btn-danger m-3" %>

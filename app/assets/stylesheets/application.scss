@@ -27,175 +27,183 @@ html {
   height: 100%;
 }
 
- body {
-   margin: 0;
-   height: 100%;
- }
+body {
+  margin: 0;
+  height: 100%;
+}
 
- .page-container {
-   position: fixed;
-   width: calc(100% - 250px);
-   height: 100%;
-   left: 250px;
-   padding: 3rem;
-   overflow-y: scroll;
+ul {
+  margin: 0;
+}
 
-   h1 {
-     margin-bottom: 20px;
-   }
- }
+a {
+  cursor: pointer;
+}
 
- // ヘッダーメニューのCSS
- .header {
-   border-top: 1px solid  rgba(52, 58, 64, .5);
-   border-bottom: 1px solid rgba(52, 58, 64, .5);
+.page-container {
+  position: fixed;
+  width: calc(100% - 250px);
+  height: 100%;
+  left: 250px;
+  padding: 3rem;
+  overflow-y: scroll;
 
-   .header-wrapper {
-     width: 100%;
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-     padding-top: 0;
-     padding-bottom: 0;
-     padding-left: .8rem;
-     padding-right: .8rem;
-     margin-left: auto;
-     margin-right: auto;
+  h1 {
+    margin-bottom: 20px;
+  }
+}
 
-     .header-start {
-       font-weight: bold;
-       font-size: 20px;
+// ヘッダーメニューのCSS
+.header {
+  border-top: 1px solid  rgba(52, 58, 64, .5);
+  border-bottom: 1px solid rgba(52, 58, 64, .5);
 
-       a {
-         color: #222;
-         text-decoration: none;
-       }
-     }
+  .header-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: .8rem;
+    padding-right: .8rem;
+    margin-left: auto;
+    margin-right: auto;
 
-     .header-end {
-       display: flex;
-       align-items: center;
+    .header-start {
+      font-weight: bold;
+      font-size: 20px;
 
-       .header-nav-wrapper {
-         display: flex;
-         list-style: none;
-         padding: 0;
+      a {
+        color: #222;
+        text-decoration: none;
+      }
+    }
 
-         .header-nav-item {
-           display: block;
-           padding: 1.5rem 1rem;
+    .header-end {
+      display: flex;
+      align-items: center;
 
-           .text {
-             line-height: 2;
-           }
+      .header-nav-wrapper {
+        display: flex;
+        list-style: none;
+        padding: 0;
 
-           a {
-             text-decoration: none;
-             color: #222;
-           }
+        .header-nav-item {
+          display: block;
+          padding: 1.5rem 1rem;
 
-           .button {
-             min-width: initial;
-             padding: .2rem 1.2rem;
-             appearance: none;
-             color: #fff;
-             border-radius: 5px;
-             text-align: center;
-             display: none;
-           }
+          .text {
+            line-height: 2;
+          }
 
-           .login-button {
-             background: #2fa0f6;
-           }
+          a {
+            text-decoration: none;
+            color: #222;
+          }
 
-           .logout-button {
-             background: red;
-           }
+          .button {
+            min-width: initial;
+            padding: .2rem 1.2rem;
+            appearance: none;
+            color: #fff;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+          }
 
-           .active {
-             display: block;
-           }
-         }
-       }
-     }
-   }
- }
- .header-bg-1 {
-   background: #C0C0C0;
- }
- .header-bg-2 {
-   background: #009c75;
- }
- .header-bg-3 {
-   background: #3F1515;
- }
- .header-bg-4 {
-   background: #FBC78D;
- }
- .header-bg-5 {
-   background: #fff;
- }
- .header-bg-6 {
-   background: #B1BEEA;
- }
- .header-bg-7 {
-   background: #FB93AC;
- }
+          .login-button {
+            background: #2fa0f6;
+          }
 
- // 左のサイドメニューバーのCSS
- .sidebar-wrapper {
-   position: fixed;
-   z-index: 2;
-   left: 0;
-   width: 250px;
-   height: 100%;
- }
- .sidebar-nav {
-   position: absolute;
-   top: 0;
-   width: 100%;
-   margin: 5rem 0 0 0;
-   padding: 0;
-   list-style: none;
+          .logout-button {
+            background: red;
+          }
 
-   &-item {
-     font-size: 1.5rem;
-     margin-bottom: 3rem;
+          .active {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}
+.header-bg-1 {
+  background: #C0C0C0;
+}
+.header-bg-2 {
+  background: #009c75;
+}
+.header-bg-3 {
+  background: #3F1515;
+}
+.header-bg-4 {
+  background: #FBC78D;
+}
+.header-bg-5 {
+  background: #fff;
+}
+.header-bg-6 {
+  background: #B1BEEA;
+}
+.header-bg-7 {
+  background: #FB93AC;
+}
 
-     a {
-       display: block;
-       text-decoration: none;
-       color: #fff;
-       padding: .8rem;
+// 左のサイドメニューバーのCSS
+.sidebar-wrapper {
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  width: 250px;
+  height: 100%;
+}
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  margin: 5rem 0 0 0;
+  padding: 0;
+  list-style: none;
 
-       &:hover {
-         background: rgba(52, 58, 64, .5);
-       }
-     }
+  &-item {
+    font-size: 1.5rem;
+    margin-bottom: 3rem;
 
-     svg {
-       margin-right: .8rem;
-     }
-   }
- }
- .sidebar-bg-1 {
-   background: #0f0e17;
- }
- .sidebar-bg-2 {
-   background: #93c0e7;
- }
- .sidebar-bg-3 {
-   background: #939369;
- }
- .sidebar-bg-4 {
-   background: #B3DDD1;
- }
- .sidebar-bg-5 {
-   background: #FFC4C8;
- }
- .sidebar-bg-6 {
-   background: #6F89A2;
- }
- .sidebar-bg-7 {
-   background: #A7D676;
- }
+    a {
+      display: block;
+      text-decoration: none;
+      color: #fff;
+      padding: .8rem;
+
+      &:hover {
+        background: rgba(52, 58, 64, .5);
+      }
+    }
+
+    svg {
+      margin-right: .8rem;
+    }
+  }
+}
+.sidebar-bg-1 {
+  background: #0f0e17;
+}
+.sidebar-bg-2 {
+  background: #93c0e7;
+}
+.sidebar-bg-3 {
+  background: #939369;
+}
+.sidebar-bg-4 {
+  background: #B3DDD1;
+}
+.sidebar-bg-5 {
+  background: #FFC4C8;
+}
+.sidebar-bg-6 {
+  background: #6F89A2;
+}
+.sidebar-bg-7 {
+  background: #A7D676;
+}
