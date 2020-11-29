@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :messages
 
   def self.guest
-    find_or_create_by!(name: 'guest', email: 'guest@example.com', bg_color_id: 1, role: 3) do |user|
+    find_or_create_by!(name: 'guest', email: 'guest@example.com', bg_color_id: 1) do |user|
       user.password = SecureRandom.urlsafe_base64
     end
   end
