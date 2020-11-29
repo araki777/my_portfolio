@@ -76,6 +76,6 @@ gem 'carrierwave'
 
 gem 'mini_magick'
 
-group :production, :staging do
+group :production do
   gem 'unicorn'
 end
